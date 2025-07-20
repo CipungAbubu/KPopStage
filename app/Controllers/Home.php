@@ -3,6 +3,10 @@
 namespace App\Controllers;
 
 use App\Models\ConcertModel;
+use App\Models\TicketModel;
+use App\Models\ArtistModel;
+use App\Models\VenueModel;
+use App\Models\OrderModel;
 
 class Home extends BaseController
 {
@@ -58,11 +62,55 @@ class Home extends BaseController
 }
 
 public function adminTicket()
+ {
+     $concertModel = new \App\Models\ConcertModel();
+     $concerts = $concertModel->findAll();
+
+     return view('admin-ticket', ['concerts' => $concerts]);
+ }
+
+ public function manageTickets()
 {
-    $concertModel = new \App\Models\ConcertModel();
+    $ticketModel = new TicketModel();
+    $concertModel = new ConcertModel();
+    
+    $tickets = $ticketModel->getTicketsWithConcert();
     $concerts = $concertModel->findAll();
-
-    return view('admin-ticket', ['concerts' => $concerts]);
+    
+    return view('templates/header') . view('admin-manage-tickets', [
+        'tickets' => $tickets,
+        'concerts' => $concerts
+    ]);
 }
 
+public function manageArtists()
+{
+    $artistModel = new ArtistModel();
+    $artists = $artistModel->orderBy('created_at', 'DESC')->findAll();
+    
+    return view('templates/header') . view('admin-manage-artists', ['artists' => $artists]);
 }
+
+public function manageVenues()
+{
+    $venueModel = new VenueModel();
+    $venues = $venueModel->orderBy('created_at', 'DESC')->findAll();
+   
+    return view('templates/header') . view('admin-manage-venues', ['venues' => $venues]);
+}
+
+public function manageOrders()
+{
+    $orderModel = new OrderModel();
+    $ticketModel = new TicketModel();
+    
+    $orders = $orderModel->getOrdersWithDetails();
+    $tickets = $ticketModel->getTicketsWithConcert();
+    
+    return view('templates/header') . view('admin-manage-orders', [
+        'orders' => $orders,
+        'tickets' => $tickets
+    ]);
+}
+
+ }

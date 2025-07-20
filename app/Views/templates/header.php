@@ -67,9 +67,17 @@
         <li class="nav-item">
           <a class="nav-link <?= service('uri')->getSegment(1) == 'manage' ? 'active' : '' ?>" href="<?= base_url('manage') ?>">Manage Konser</a>
         </li>
+<a class="nav-link <?= service('uri')->getSegment(1) == 'manage-tickets' ? 'active' : '' ?>" href="<?= base_url('manage-tickets') ?>">Manage Tiket</a>
+        </li>
         <li class="nav-item">
-  <a class="nav-link <?= service('uri')->getSegment(1) == 'admin-ticket' ? 'active' : '' ?>" href="<?= base_url('admin-ticket') ?>">Manage Tiket</a>
-</li>
+          <a class="nav-link <?= service('uri')->getSegment(1) == 'manage-artists' ? 'active' : '' ?>" href="<?= base_url('manage-artists') ?>">Manage Artis</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?= service('uri')->getSegment(1) == 'manage-venues' ? 'active' : '' ?>" href="<?= base_url('manage-venues') ?>">Manage Venue</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?= service('uri')->getSegment(1) == 'manage-orders' ? 'active' : '' ?>" href="<?= base_url('manage-orders') ?>">Manage Pesanan</a>
+        </li>
       </ul>
     </div>
   </div>
